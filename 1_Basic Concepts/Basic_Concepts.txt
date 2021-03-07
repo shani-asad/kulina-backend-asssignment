@@ -1,0 +1,23 @@
+1. Coding:
+
+    A. Give an example of code smell (1) that usually happened in OOP. Explain and give the preventive action.
+
+    One example of a code smell in OOP is when we instantiate a class in another class, this creates a tight coupling between the two. Let's say we have class A, and inside it we instantiate class B. For class A to function it depends on the instantiation of class B, and let's say class B needs to send a request to a DB in its constructor. If for some reason the DB is down, class B cannot be instantiated, therefore class A cannot use object of class B inside it.
+
+    Another problem with this is if we have a lot of classes that needs an instance of class B, then we would need to instantiate class B for all these classes, and all the instance will be stored the memory. This can be prevented using dependency injection.
+
+    B. Explain briefly about Dependency Injection, and why is it important ?
+
+    From the previous example, we can say that class A is dependent on class B, or class B is a dependency of class A. Using dependency injection we do not have to instantiate a class everytime we want to use it, we only need to create an instance of a class once and then pass the instance to all classes that depends on it. The instance that's passed around is not coppied, it is the same instance so it will use less space in memory. A dependency injection framework such as Spring in Java, will handle the instantiation of the object and pass it to classes that needs it, the process of creating, distributing, and storing the object is abstracted away so we can focus on other part of our code.
+
+
+2. Rest API:
+
+    A. Give 1 example each, of what do’s and don’ts when you handle request while using these method :
+        - POST
+          - Do    : Send data to server to create something.
+          - Don't : Bookmark a POST request, only URL will be book marked and the body of the POST request will be gone.
+          
+        - GET
+          - Do    : Cache a GET request so next request with same query will be processed faster
+          - Don't : Send sensitive information, like when submitting a password. because the password will be shown in the URL and saved in browser's history.
